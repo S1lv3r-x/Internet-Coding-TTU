@@ -1,2 +1,9 @@
-# Internet-Coding-TTU
-a private repository for the summer class of internet programming
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My GitHub Page</title>
+</head>
+<body>
+  <h1>Hello from GitHub Pages!</h1>
+</body>
+</html>
