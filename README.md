@@ -2,8 +2,13 @@
 <html>
 <head>
   <title>My GitHub Page</title>
+  <style>
+    .blue-text {
+      color: lightblue;
+    }
+  </style>
 </head>
 <body>
-  <h1><color:'Blue'>Mohammad Khaled Github Page ...</h1>
+  <h1 class="blue-text">Mohammad Khaled GitHub Page ...</h1>
 </body>
 </html>
