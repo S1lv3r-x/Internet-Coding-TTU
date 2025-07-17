@@ -9,6 +9,6 @@
   </style>
 </head>
 <body>
-  <h1 class="blue-text">Mohammad Khaled GitHub Page ...</h1>
+  <h1 class="blue-text">Mohammad Khaled GitHub Page ..</h1>
 </body>
 </html>
