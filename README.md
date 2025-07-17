@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My GitHub Page</title>
-  <style>
-    .blue-text {
-      color: lightblue;
-    }
-  </style>
+</style>
 </head>
 <body>
-  <h1 class="blue-text">Mohammad Khaled GitHub Page ..</h1>
+  <h1> Mohammad Khaled GitHub Page ..</h1>
 </body>
 </html>
