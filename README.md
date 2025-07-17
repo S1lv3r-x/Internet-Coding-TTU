@@ -4,6 +4,6 @@
   <title>My GitHub Page</title>
 </head>
 <body>
-  <h1>Mohammad Khaled Github Page ...</h1>
+  <h1><color:'Blue'>Mohammad Khaled Github Page ...</h1>
 </body>
 </html>
