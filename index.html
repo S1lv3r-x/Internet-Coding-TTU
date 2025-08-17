@@ -1,14 +1,250 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My GitHub Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Uber - Tafila</title>
   <style>
-    .blue-text {
-      color: lightblue;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url("https://imgur.com/TMPbtdL.jpg") no-repeat center center fixed;
+  background-size: cover;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0,0,0,0.4);
+      z-index: -1;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      width: 100%;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .names {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 6px 10px;
+      border-radius: 8px;
+      width: 270px;
+      text-align: center;
+      font-size: 14px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    #map {
+      margin-top: 20px;
+    }
+    #map iframe {
+      width: 350px;
+      height: 350px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .right-col {
+      width: 340px;
+      margin-top: 68px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .taxi-box {
+      background: rgba(255, 255, 255, 0.92);
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.14);
+      text-align: center;
+      margin-bottom: 12px;
+      width: 100px;
+    }
+    #taxiEmoji {
+      font-size: 40px;
+      display: none;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.92);
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.14);
+      text-align: center;
+      width: 100%;
+    }
+    .box label {
+      display: block;
+      text-align: left;
+      font-weight: bold;
+      margin: 6px 0 4px;
+    }
+    .box input {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+      background: #fff;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: none;
+      background: #000;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    button:hover { background: #333; }
+
+    #status {
+      margin-top: 12px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .user-name-banner {
+      font-weight: 800;
+      margin-bottom: 8px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.06);
+      text-align: center;
+    }
+
+    @media (max-width: 780px) {
+      .right-col, .left-col { width: 100%; }
+      .right-col { max-width: 420px; margin: 0 auto; }
+      #map iframe { width: 100%; height: 320px; }
     }
   </style>
 </head>
 <body>
-  <h1 class="blue-text">Mohammad Khaled GitHub Page ...</h1>
+
+  <header>🚖 Mini Uber - Tafila</header>
+
+  <div class="container">
+    <div class="left-col">
+      <div class="names">
+        <p><strong>Student Name:</strong> Mohammad Al-Sawalqa</p>
+        <p><strong>Instructor Name:</strong> Naeem Al-Odat</p>
+      </div>
+
+      <div id="map">
+        <iframe
+          style="border:0;"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3373.476758416443!2d35.605058!3d30.835116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1503bb9a4d524d6b%3A0xd777c60f1b9e19c1!2sTafilah!5e0!3m2!1sen!2sjo!4v1693600000000">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="right-col">
+      <div class="taxi-box">
+        <div id="taxiEmoji">🚖</div>
+      </div>
+
+      <div id="dynamicBox" class="box">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" placeholder="Enter first name">
+
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" placeholder="Enter last name">
+
+        <button id="confirmNameBtn">Confirm Name</button>
+        <p id="nameStatus"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const dynamicBox   = document.getElementById('dynamicBox');
+    const taxiEmoji    = document.getElementById('taxiEmoji');
+    const confirmBtn   = document.getElementById('confirmNameBtn');
+
+    confirmBtn.addEventListener('click', () => {
+      const firstName = (document.getElementById('firstName').value || "").trim();
+      const lastName  = (document.getElementById('lastName').value  || "").trim();
+      const nameStatus = document.getElementById('nameStatus');
+
+      if (!firstName || !lastName) {
+        nameStatus.textContent = "Please enter both first and last name.";
+        nameStatus.style.color = "red";
+        return;
+      }
+
+      const fullName = `${firstName} ${lastName}`;
+
+      dynamicBox.innerHTML = `
+        <div class="user-name-banner">Uber for: ${fullName}</div>
+        <label for="pickupInput">Pickup Location</label>
+        <input type="text" id="pickupInput" placeholder="Enter pickup point">
+
+        <label for="dropoffInput">Drop-off Location</label>
+        <input type="text" id="dropoffInput" placeholder="Enter drop-off point">
+
+        <button id="requestBtn">Request Ride</button>
+        <p id="status"></p>
+      `;
+
+      const requestBtn  = document.getElementById('requestBtn');
+      const statusText  = document.getElementById('status');
+      const pickupInput = document.getElementById('pickupInput');
+      const dropoffInput= document.getElementById('dropoffInput');
+
+      pickupInput.focus();
+
+      requestBtn.addEventListener('click', () => {
+        const pickupLoc  = pickupInput.value.trim();
+        const dropoffLoc = dropoffInput.value.trim();
+
+        taxiEmoji.style.display = "none";
+
+        if (!pickupLoc || !dropoffLoc) {
+          statusText.textContent = "Please enter both pickup and drop-off locations.";
+          statusText.style.color = "red";
+          return;
+        }
+
+        statusText.style.color = "black";
+        statusText.textContent = "Searching for driver...";
+
+        setTimeout(() => {
+          statusText.textContent = "Driver found! On the way to " + pickupLoc + ".";
+          taxiEmoji.style.display = "block";
+        }, 1000);
+      });
+    });
+  </script>
+
 </body>
 </html>
